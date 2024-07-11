@@ -1,11 +1,22 @@
-import React from 'react';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import app from '../../firebase.config';
 
 const HeroRegister = () => {
     const handleRegister = e => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
+        const auth = getAuth(app);
+
         console.log(email);
+        console.log(password);
+        createUserWithEmailAndPassword(auth, email,password)
+        .then(result => {
+            console.log("result ::" + result);
+        })
+        .catch(error => {
+            console.log("error ::" + error.message);
+        })
     }
     return (
         <div>
